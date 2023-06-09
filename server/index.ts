@@ -1,15 +1,13 @@
 const express = require('express');
-import { Express, Request, Response, NextFunction } from 'express';
+import { Express } from 'express';
 const app: Express = express();
-const fs = require('fs');
-const path = require('path');
+const cors = require('cors');
 
 const PORT = 3000;
-const folderPath = '../obsidian/';
 
 app.use(express.json());
-app.get('/', (req: Request, res: Response) => {
-  console.log('Request received!');
-  res.send('Hello, world!');
-});
+app.use(cors());
+
+app.use('/', require('./obsidianRoutes'));
+
 app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));

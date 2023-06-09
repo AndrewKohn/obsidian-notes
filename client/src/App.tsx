@@ -1,40 +1,45 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import ReactMarkDown from 'react-markdown';
-import breaks from 'remark-breaks';
+import MarkdownPage from './components/MarkDownPage';
 
-const App = () => {
-  const [example, setExample] = useState<any>(undefined);
+const App: React.FC = () => {
+  const [data, setData] = useState<any>(undefined);
+  const [obsidianPages, setObsidianPages] = useState<string[]>([]);
+
+  // Initial get.  Retrieves file paths.
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get('../../obsidian/test.md');
-      const data = response.data;
-      setExample(data);
-    };
-
-    fetchData();
+    axios
+      .get('http://localhost:3000/')
+      .then(res => {
+        const contents = res.data.files;
+        console.log(typeof contents);
+        setData(contents);
+      })
+      .catch(error => {
+        console.error('Error retrieving file list:', error);
+      });
   }, []);
 
-  // useEffect(() => console.log(example), [example]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await axios.get(`../obsidian`);
-  //     const data = response.data;
-  //     console.log(data);
-  //   };
-
-  //   fetchData();
-  // }, []);
+  // Returns a filepath string & stores into array.
+  useEffect(() => {
+    if (data !== undefined) {
+      const updatedFilePath = data.map((filePath: string) => {
+        if (filePath.includes('\\')) {
+          return filePath.replace(/\\/g, '/');
+        }
+        return filePath;
+      });
+      setObsidianPages(updatedFilePath);
+    }
+  }, [data]);
 
   return (
     <main>
       <h1>H1 TITLE</h1>
-      {example !== undefined ? (
-        <ReactMarkDown remarkPlugins={[breaks]} children={example} />
-      ) : (
-        ''
-      )}
+      {obsidianPages.map((filePath: string) => (
+        // <MarkdownPage key={filePath} filePath={filePath} />
+        <p key={filePath}>{filePath}</p>
+      ))}
     </main>
   );
 };
