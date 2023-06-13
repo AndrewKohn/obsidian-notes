@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 import MarkdownPage from './components/MarkDownPage';
+import PageNotFound from './pages/PageNotFound';
 
 const App: React.FC = () => {
-  const [data, setData] = useState<any>(undefined);
+  const [data, setData] = useState<string[] | undefined>(undefined);
   const [obsidianPages, setObsidianPages] = useState<string[]>([]);
 
   // Initial get.  Retrieves file paths.
@@ -12,7 +15,6 @@ const App: React.FC = () => {
       .get('http://localhost:3000/')
       .then(res => {
         const contents = res.data.files;
-        console.log(typeof contents);
         setData(contents);
       })
       .catch(error => {
@@ -33,13 +35,34 @@ const App: React.FC = () => {
     }
   }, [data]);
 
+  // Get file name from file path
+  const markdownRoutes = obsidianPages.map((filePath: string, key: number) => {
+    const reversedFilePath = filePath.split('').reverse().slice(3);
+    let fileName = '';
+
+    for (let i = 0; i < reversedFilePath.length; i++) {
+      if (reversedFilePath[i] === '/') break;
+      fileName += reversedFilePath[i];
+    }
+
+    fileName = fileName.split('').reverse().join('');
+
+    return (
+      <Route
+        key={key}
+        path={`/${fileName}`}
+        element={<MarkdownPage key={filePath} filePath={filePath} />}
+      />
+    );
+  });
+
   return (
     <main>
-      <h1>H1 TITLE</h1>
-      {obsidianPages.map((filePath: string) => (
-        // <MarkdownPage key={filePath} filePath={filePath} />
-        <p key={filePath}>{filePath}</p>
-      ))}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        {obsidianPages ? markdownRoutes.map((route: JSX.Element) => route) : ''}
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
     </main>
   );
 };
