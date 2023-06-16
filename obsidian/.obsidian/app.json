@@ -1,1 +1,10 @@
-{}
+{
+  "fileSortOrder": "alphabetical",
+  "showLineNumber": false,
+  "readableLineLength": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "spellcheck": true,
+  "promptDelete": false,
+  "showInlineTitle": false
+}

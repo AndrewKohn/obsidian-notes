@@ -1,3 +1,8 @@
 {
-  "accentColor": ""
+  "baseFontSize": 16,
+  "cssTheme": "",
+  "accentColor": "",
+  "showViewHeader": true,
+  "nativeMenus": false,
+  "translucency": false
 }
