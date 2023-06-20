@@ -1,36 +1,52 @@
-interface Props {
-  links: {
-    folderPath: string[];
-    link: JSX.Element;
-  }[];
-}
+import { Fragment } from 'react';
+import notepadImg from '../assets/notepad.png';
+import userImg from '../assets/user.png';
+import briefcaseImg from '../assets/briefcase.png';
 
-const Home = ({ links }: Props) => {
-  let prevPath: string[] = [''];
-
+const Home = () => {
   return (
-    <section>
-      <h1>HOME PAGE</h1>
-      <ul>
-        {links.map(
-          (link: { folderPath: string[]; link: JSX.Element }, key: number) => {
-            if (JSON.stringify(link.folderPath) !== JSON.stringify(prevPath)) {
-              prevPath = link.folderPath;
-
-              return (
-                <div key={key}>
-                  <hr />
-                  <p className="folder-name">{prevPath.join('/') + '/'}</p>
-                  <li key={key}>{link.link}</li>
-                </div>
-              );
-            }
-
-            return <li key={key}>{link.link}</li>;
-          }
-        )}
-      </ul>
-    </section>
+    <Fragment>
+      <section className="section--home">
+        <h1>O(n)otes</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam saepe
+          recusandae eaque dolorum temporibus, tempora voluptatum sit autem cum
+          porro, impedit maiores, cumque fuga. Distinctio totam dignissimos
+          vitae quod vel?
+        </p>
+      </section>
+      <section className="section--grid section--centered">
+        <div className="grid">
+          <div>
+            <img src={notepadImg} alt="Writing on a notepad" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+              eius voluptate distinctio totam id omnis dignissimos voluptates
+              aliquam rem corrupti ducimus, ut ullam eligendi nesciunt facere in
+              iusto soluta beatae.
+            </p>
+          </div>
+          <div>
+            <img src={briefcaseImg} alt="Man walking with briefcase" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+              eius voluptate distinctio totam id omnis dignissimos voluptates
+              aliquam rem corrupti ducimus, ut ullam eligendi nesciunt facere in
+              iusto soluta beatae.
+            </p>
+          </div>
+          <div>
+            <img src={userImg} alt="PC user on their computer" />
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+              eius voluptate distinctio totam id omnis dignissimos voluptates
+              aliquam rem corrupti ducimus, ut ullam eligendi nesciunt facere in
+              iusto soluta beatae.
+            </p>
+          </div>
+        </div>
+      </section>
+    </Fragment>
   );
 };
 
