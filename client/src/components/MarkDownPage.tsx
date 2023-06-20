@@ -23,9 +23,9 @@ const MarkdownPage: React.FC<Props> = ({ filePath }) => {
   }, [filePath]);
 
   return (
-    <div>
+    <section>
       <ReactMarkdown remarkPlugins={[breaks]}>{markdownContent}</ReactMarkdown>
-    </div>
+    </section>
   );
 };
 
