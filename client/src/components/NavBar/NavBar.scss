@@ -1,0 +1,37 @@
+nav {
+  position: fixed;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  background-color: #fefefe;
+  box-shadow: 0 -2px 3px 3px rgba(62, 62, 62, 0.35);
+  padding: 2rem 24rem;
+  box-sizing: border-box;
+  z-index: 55;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.link {
+  &:link,
+  &:visited {
+    padding: 0.6rem 0.8rem;
+    color: #2e2e2e;
+    font-weight: 600;
+    border-radius: 3px;
+    transition: all 0.2s linear;
+  }
+
+  &:hover {
+    background-color: #cecece;
+  }
+
+  &:active {
+    background-color: #aaa;
+  }
+}

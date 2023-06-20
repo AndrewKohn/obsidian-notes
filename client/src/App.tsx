@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import MarkdownPage from './components/MarkDownPage';
 import PageNotFound from './pages/PageNotFound';
+import NavBar from './components/NavBar/NavBar';
+import Notes from './pages/Notes';
+import About from './pages/About';
+import './index.css';
 
 interface ObsidianPage {
   fileName: string;
@@ -67,7 +71,7 @@ const App: React.FC = () => {
       return (
         <Route
           key={key}
-          path={`/${obsidianPage.fileName}`}
+          path={`/notes/${obsidianPage.fileName}`}
           element={<MarkdownPage key={key} filePath={obsidianPage.filePath} />}
         />
       );
@@ -77,12 +81,12 @@ const App: React.FC = () => {
   const mdLinks = obsidianPages.map(
     (obsidianPage: ObsidianPage, key: number) => {
       const filePath: string[] = obsidianPage.filePath.split('/');
-      const folderPath: string[] = filePath.splice(0, filePath.length - 1);
+      const folderPath: string[] = filePath.splice(1, filePath.length - 2);
 
       return {
         folderPath: folderPath,
         link: (
-          <Link key={key} to={obsidianPage.fileName}>
+          <Link key={key} to={`/notes/${obsidianPage.fileName}`}>
             <p>{obsidianPage.fileName}</p>
           </Link>
         ),
@@ -91,13 +95,18 @@ const App: React.FC = () => {
   );
 
   return (
-    <main>
-      <Routes>
-        <Route path="/" element={<Home links={mdLinks} />} />
-        {obsidianPages ? mdRoutes.map((route: JSX.Element) => route) : ''}
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </main>
+    <Fragment>
+      <main>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home links={mdLinks} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/notes" element={<Notes links={mdLinks} />} />
+          {obsidianPages ? mdRoutes.map((route: JSX.Element) => route) : ''}
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </main>
+    </Fragment>
   );
 };
 
