@@ -99,7 +99,7 @@ const App: React.FC = () => {
       <main>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home links={mdLinks} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/notes" element={<Notes links={mdLinks} />} />
           {obsidianPages ? mdRoutes.map((route: JSX.Element) => route) : ''}
