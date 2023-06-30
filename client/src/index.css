@@ -168,19 +168,27 @@ li {
   padding: 0;
 }
 
+.section--home div {
+  width: 100%;
+  transform: translateX(-10rem);
+  display: flex;
+  gap: 2.4rem;
+  justify-content: flex-end;
+}
+
 .section--centered {
   align-items: center;
 }
 
 .section--grid {
   width: 100%;
-  background-color: rgba(0, 81, 255, 0.7);
+  background-color: rgb(65, 125, 255);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6rem;
 }
 
 .grid div {
@@ -202,6 +210,23 @@ li {
   z-index: 2;
 }
 
+.grid-icon {
+  position: absolute;
+  width: 4.4rem;
+  height: 4.4rem;
+  color: rgb(65, 125, 255);
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  transform: translate(2.8rem, -2rem);
+  transform: translate(2.8rem, -2rem);
+  transition: color 0.2s linear;
+}
+
+.grid div:hover .grid-icon {
+  color: #fefefe;
+}
+
 .grid div img {
   position: absolute;
   top: 0;
@@ -216,20 +241,51 @@ li {
   filter: brightness(0.35);
 }
 
-.grid div:last-child img {
+.grid div:nth-child(3) img {
   filter: brightness(0.6);
 }
 
-.grid div:last-child:hover img {
+.grid div:nth-child(3):hover img {
   filter: brightness(0.85);
 }
 
 .grid div p {
   position: absolute;
-  padding: 0 0.8rem;
+  padding: 0 2.8rem;
+  font-size: 1.8rem;
   left: 0;
-  top: 50%;
-  transform: translate(0, -50%);
+  top: 0;
+  transform: translateY(4rem);
   z-index: 3;
   color: #fefefe;
+  transition: color 0.2s linear;
+}
+
+.grid div:not(:hover) p {
+  color: rgba(254, 254, 254, 0.5);
+}
+
+.btn {
+  padding: 1.6rem 2.4rem;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  background-color: #fefefe;
+  box-shadow: 0 3px 5px 1px rgba(51, 51, 51, 0.5);
+  transform: scaleX(1);
+  transition: transform 0.2s linear, box-shadow 0.3s linear;
+}
+
+.btn:hover {
+  box-shadow: 0 0 5px 1px rgba(51, 51, 51, 0.35);
+}
+
+.btn:active {
+  transform: scaleX(1.05);
+}
+
+.cta-btn:visited,
+.cta-btn:link {
+  color: black;
+  background-color: rgb(65, 125, 255);
 }
