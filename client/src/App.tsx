@@ -1,6 +1,8 @@
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Routes, Route, Link } from 'react-router-dom';
+import { updateFilePath } from './utils/updateFilePath';
+import { getFileName } from './utils/getFileName';
 import Home from './pages/Home';
 import MarkdownPage from './components/MarkDownPage';
 import PageNotFound from './pages/PageNotFound';
@@ -44,27 +46,6 @@ const App: React.FC = () => {
       setObsidianPages(getObsidianFiles);
     }
   }, [data]);
-
-  const updateFilePath = (filePath: string) => {
-    if (filePath.includes('\\')) {
-      return filePath.replace(/\\/g, '/');
-    }
-    return filePath;
-  };
-
-  const getFileName = (filePath: string) => {
-    const reversedFilePath = filePath.split('').reverse().slice(3);
-    let fileName = '';
-
-    for (let i = 0; i < reversedFilePath.length; i++) {
-      if (reversedFilePath[i] === '/') break;
-      fileName += reversedFilePath[i];
-    }
-
-    fileName = fileName.split('').reverse().join('');
-
-    return fileName;
-  };
 
   const mdRoutes = obsidianPages.map(
     (obsidianPage: ObsidianPage, key: number) => {
