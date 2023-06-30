@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { updateFilePath } from './utils/updateFilePath';
 import { getFileName } from './utils/getFileName';
 import Home from './pages/Home';
@@ -19,6 +19,11 @@ interface ObsidianPage {
 const App: React.FC = () => {
   const [data, setData] = useState<string[] | undefined>(undefined);
   const [obsidianPages, setObsidianPages] = useState<ObsidianPage[]>([]);
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, [location]);
 
   // Initial get.  Retrieves file paths.
   useEffect(() => {
@@ -67,7 +72,13 @@ const App: React.FC = () => {
       return {
         folderPath: folderPath,
         link: (
-          <Link key={key} to={`/notes/${obsidianPage.fileName}`}>
+          <Link
+            key={key}
+            to={`/notes/${obsidianPage.fileName}`}
+            onClick={() =>
+              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+            }
+          >
             <p>{obsidianPage.fileName}</p>
           </Link>
         ),

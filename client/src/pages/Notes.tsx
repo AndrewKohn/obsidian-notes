@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import '../index.css';
 
 interface Props {
@@ -9,6 +10,8 @@ interface Props {
 
 const Notes = ({ links }: Props) => {
   let prevPath: string[] = [''];
+
+  useEffect(() => scroll({ top: 0, left: 0, behavior: 'smooth' }), [links]);
 
   return (
     <section className="section--centered">
