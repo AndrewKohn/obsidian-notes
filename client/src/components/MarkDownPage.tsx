@@ -12,7 +12,7 @@ const MarkdownPage: React.FC<Props> = ({ filePath }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/${encodeURIComponent(filePath)}`)
+      .get(`http://localhost:3002/${encodeURIComponent(filePath)}`)
       .then(res => {
         const { content } = res.data;
         setMarkdownContent(content);

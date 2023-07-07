@@ -25,9 +25,9 @@ describe('<App />', () => {
       const mock = new MockAdapter(axios);
       const responseData = ['testFile1', 'testFile2', 'testFile3'];
 
-      mock.onGet('http://localhost:3000/').reply(200, responseData);
+      mock.onGet('http://localhost:3002/').reply(200, responseData);
       const response = await axios
-        .get('http://localhost:3000/')
+        .get('http://localhost:3002/')
         .then(res => res.data);
       expect(response).toEqual(responseData);
       mock.restore();
