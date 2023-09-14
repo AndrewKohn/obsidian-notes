@@ -28,7 +28,7 @@ const App: React.FC = () => {
   // Initial get.  Retrieves file paths.
   useEffect(() => {
     axios
-      .get('http://localhost:3002/')
+      .get('http://68.47.47.44:59641/')
       .then(res => {
         const contents = res.data.files;
         setData(contents);
